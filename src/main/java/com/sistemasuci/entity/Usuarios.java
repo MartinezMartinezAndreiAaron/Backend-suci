@@ -1,10 +1,13 @@
 package com.sistemasuci.entity;
 
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
@@ -29,8 +32,10 @@ public class Usuarios implements Serializable {
     @ManyToOne
     private Persona idpersonafk;
     @JoinColumn(name = "tipousuariofk", referencedColumnName = "idtipousuario")
-    @ManyToOne
-    private Tipousuario tipousuariofk;
+    @ManyToMany
+    //private Tipousuario tipousuariofk;
+
+    private Set<Tipousuario> tipousuarios = new HashSet<>();
 
     public Usuarios() {
     }
@@ -68,14 +73,12 @@ public class Usuarios implements Serializable {
         this.idpersonafk = idpersonafk;
     }
 
-    public Tipousuario getTipousuariofk() {
-        return tipousuariofk;
-    }
-
-    public void setTipousuariofk(Tipousuario tipousuariofk) {
-        this.tipousuariofk = tipousuariofk;
-    }
-
+    /**
+     * public Tipousuario getTipousuariofk() { return tipousuariofk; }
+     *
+     * public void setTipousuariofk(Tipousuario tipousuariofk) {
+     * this.tipousuariofk = tipousuariofk; }
+     */
     @Override
     public int hashCode() {
         int hash = 0;
@@ -99,6 +102,14 @@ public class Usuarios implements Serializable {
     @Override
     public String toString() {
         return "com.sistemasuci.entity.Usuarios[ usuario=" + usuario + " ]";
+    }
+
+    public Set<Tipousuario> getTipousuarios() {
+        return tipousuarios;
+    }
+
+    public void setTipousuarios(Set<Tipousuario> tipousuarios) {
+        this.tipousuarios = tipousuarios;
     }
 
 }

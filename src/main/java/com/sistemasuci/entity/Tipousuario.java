@@ -8,6 +8,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -32,7 +33,7 @@ public class Tipousuario implements Serializable {
     private List<Persona> personaList;
     @OneToMany(mappedBy = "tipousuariofk")
     private List<Personal> personalList;
-    @OneToMany(mappedBy = "tipousuariofk")
+    @ManyToMany(mappedBy = "tipousuarios")
     private List<Usuarios> usuariosList;
     @OneToMany(mappedBy = "tipousuariofk")
     private List<Reporte> reporteList;
