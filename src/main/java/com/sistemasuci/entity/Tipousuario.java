@@ -28,7 +28,7 @@ public class Tipousuario implements Serializable {
     private Integer idtipousuario;
     @Basic(optional = false)
     @Column(name = "tipousuario")
-    private String tipousuario;
+    private TipoUsuarioNombre tipousuario;
     @OneToMany(mappedBy = "tipousuariofk")
     private List<Persona> personaList;
     @OneToMany(mappedBy = "tipousuariofk")
@@ -45,7 +45,7 @@ public class Tipousuario implements Serializable {
         this.idtipousuario = idtipousuario;
     }
 
-    public Tipousuario(Integer idtipousuario, String tipousuario) {
+    public Tipousuario(Integer idtipousuario, TipoUsuarioNombre tipousuario) {
         this.idtipousuario = idtipousuario;
         this.tipousuario = tipousuario;
     }
@@ -58,11 +58,11 @@ public class Tipousuario implements Serializable {
         this.idtipousuario = idtipousuario;
     }
 
-    public String getTipousuario() {
+    public TipoUsuarioNombre getTipousuario() {
         return tipousuario;
     }
 
-    public void setTipousuario(String tipousuario) {
+    public void setTipousuario(TipoUsuarioNombre tipousuario) {
         this.tipousuario = tipousuario;
     }
 /**

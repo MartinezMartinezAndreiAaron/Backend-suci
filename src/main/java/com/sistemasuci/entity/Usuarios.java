@@ -6,6 +6,7 @@ import java.util.Set;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.JoinColumn;
@@ -32,7 +33,7 @@ public class Usuarios implements Serializable {
     @ManyToOne
     private Persona idpersonafk;
     @JoinColumn(name = "tipousuariofk", referencedColumnName = "idtipousuario")
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.LAZY)
     //private Tipousuario tipousuariofk;
 
     private Set<Tipousuario> tipousuarios = new HashSet<>();

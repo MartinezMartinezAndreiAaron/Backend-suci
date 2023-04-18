@@ -4,6 +4,7 @@ import com.sistemasuci.entity.Reporte;
 import com.sistemasuci.service.ReporteService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/reporte")
+@CrossOrigin("*")
 public class ReporteController {
 
     @Autowired

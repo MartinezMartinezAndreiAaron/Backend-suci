@@ -1,15 +1,14 @@
-package com.sistemasuci.request;
+package com.sistemasuci.payload.request;
 
-import com.sistemasuci.entity.Tipousuario;
-import java.util.Set;
+import javax.validation.constraints.NotBlank;
 
-public class SingUpForm {
+public class LoginRequest {
 
+    @NotBlank
     private String username;
 
+    @NotBlank
     private String password;
-
-    private Set<String> tipousuario;
 
     public String getUsername() {
         return username;
@@ -26,13 +25,4 @@ public class SingUpForm {
     public void setPassword(String password) {
         this.password = password;
     }
-
-    public Set<String> getTipousuario() {
-        return tipousuario;
-    }
-
-    public void setTipousuario(Set<String> tipousuario) {
-        this.tipousuario = tipousuario;
-    }
-
 }

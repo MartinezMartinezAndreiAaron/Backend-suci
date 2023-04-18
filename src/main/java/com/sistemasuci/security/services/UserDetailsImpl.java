@@ -1,7 +1,5 @@
-package security.service;
+package com.sistemasuci.security.services;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.sistemasuci.entity.Usuarios;
 import java.util.Collection;
 import java.util.List;
 import java.util.Objects;
@@ -9,35 +7,57 @@ import java.util.stream.Collectors;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.sistemasuci.entity.User;
 
-public class UserPrinciple implements UserDetails {
+public class UserDetailsImpl implements UserDetails {
 
     private static final long serialVersionUID = 1L;
 
-    private String usarname;
+    private Long id;
+
+    private String username;
+
+    private String email;
 
     @JsonIgnore
     private String password;
 
     private Collection<? extends GrantedAuthority> authorities;
 
-    public UserPrinciple(String username, String password,
+    public UserDetailsImpl(Long id, String username, String email, String password,
             Collection<? extends GrantedAuthority> authorities) {
-        this.usarname = username;
+        this.id = id;
+        this.username = username;
+        this.email = email;
         this.password = password;
         this.authorities = authorities;
     }
 
-    /**
-     * public static UserPrinciple build(Usuarios user) { List<GrantedAuthority>
-     * authorities = user.getTipousuariofk().stream().map( tipousuario -> new
-     * SimpleGrantedAuthority(tipousuario.getTipousuario().name()))
-     * .collect(Collectors.toList()); return new
-     * UserPrinciple(user.getUsuario(), user.getContraseña(), authorities); }
-     */
+    public static UserDetailsImpl build(User user) {
+        List<GrantedAuthority> authorities = user.getRoles().stream()
+                .map(role -> new SimpleGrantedAuthority(role.getName().name()))
+                .collect(Collectors.toList());
+
+        return new UserDetailsImpl(
+                user.getId(),
+                user.getUsername(),
+                user.getEmail(),
+                user.getPassword(),
+                authorities);
+    }
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return authorities;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public String getEmail() {
+        return email;
     }
 
     @Override
@@ -47,7 +67,7 @@ public class UserPrinciple implements UserDetails {
 
     @Override
     public String getUsername() {
-        return usarname;
+        return username;
     }
 
     @Override
@@ -78,8 +98,7 @@ public class UserPrinciple implements UserDetails {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-
-        UserPrinciple user = (UserPrinciple) o;
-        return Objects.equals(usarname, user.usarname);
+        UserDetailsImpl user = (UserDetailsImpl) o;
+        return Objects.equals(id, user.id);
     }
 }

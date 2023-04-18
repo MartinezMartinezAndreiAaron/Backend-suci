@@ -1,10 +1,10 @@
-package com.sistemasuci.reponse;
+package com.sistemasuci.payload.response;
 
-public class ResponseMessage {
+public class MessageResponse {
 
     private String message;
 
-    public ResponseMessage(String message) {
+    public MessageResponse(String message) {
         this.message = message;
     }
 
@@ -15,5 +15,4 @@ public class ResponseMessage {
     public void setMessage(String message) {
         this.message = message;
     }
-
 }
